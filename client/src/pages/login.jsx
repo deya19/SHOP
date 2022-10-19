@@ -5,6 +5,11 @@ import styled from 'styled-components'
 import { login } from '../redux/apiCalls'
 import {mobile, Tablate} from "../responsive"
 import { Helmet } from "react-helmet-async";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 
 const Container = styled.div`
 width:100vw;
@@ -51,7 +56,7 @@ padding: 10px;
 const Button = styled.button`
 width: 100%;
 border: none;
-border-radius: 10x;
+border-radius: 10px;
 padding: 15px 20px ;
 background-color: teal;
 color:#fff;
@@ -69,9 +74,7 @@ font-size: 15px;
 text-decoration: underline;
 cursor: pointer;
 `
-const Error = styled.span`
-color:red
-`
+
 
 function Login() {
  
@@ -79,13 +82,13 @@ function Login() {
   const[password,SetPassword] = useState("")
   const dispatch = useDispatch();
   const {isFetching,error} = useSelector(state=>state.user)
-
+  
 
 
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch,{username, password});
+    username && password && login(dispatch,{username, password});
   }
 
 
@@ -103,14 +106,27 @@ function Login() {
             <Input 
              placeholder="name"
              onChange={(e) => SetUsername(e.target.value)}
+             required
             />
             <Input 
             type="password"
             placeholder="Password" 
             onChange={(e) => SetPassword(e.target.value)}
+            required
             />
-            <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
-            {error && <Error>Somthing went wrong...</Error>}
+            <Button onClick={handleClick} disabled={isFetching} >LOGIN</Button>
+            {error && 
+              <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity="error">The Username or Password wrong — check it out!</Alert> 
+              </Stack>
+            }
+            {
+              isFetching &&
+               <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
+              <CircularProgress color="secondary" />
+              </Stack> 
+            }
+            
             <Link1>DO NOT YOU REMEMBER THE PASSWORD?</Link1>
             <Link to="/register"><Link1>CREATE A NEW ACCOUNT</Link1></Link>
         </Form>

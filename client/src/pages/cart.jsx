@@ -250,7 +250,7 @@ function Cart() {
         console.log(error)
       }
     }
-    stripeToken && makeRequest();
+    stripeToken && cart.totla>=1 && makeRequest();
     },[stripeToken, cart.total, navigate, cart])
 
 
@@ -319,7 +319,7 @@ function Cart() {
                       {currentUser? 
                       <StripeCheckout
                       name="Shop App"
-                      image="https://cdn.icon-icons.com/icons2/1182/PNG/128/1490129392-rounded28_82189.png"
+                      image="https://firebasestorage.googleapis.com/v0/b/shop-d56bf.appspot.com/o/16661723512931490129392-rounded28_82189.ico?alt=media&token=813db413-acea-4e69-9e6b-6fb819deaeb8"
                       billingAddress
                       shippingAddress
                       description={`Your total is $${cart.total}`}

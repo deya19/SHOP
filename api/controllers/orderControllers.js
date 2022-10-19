@@ -46,7 +46,7 @@ const orderShop_order_delete = async (req, res) => {
 //GET USER ORDERS
 const orderShop_oneOrder_get = async (req, res) => {
   try {
-    const orders = await OrderShop.find({ userId: req.params.userId });
+    const orders = await OrderShop.find({ userId: req.params.userId }); // we use find every products thatcome under this user
     res.status(200).json(orders);
   } catch (error) {
     res.status(500).json(error);

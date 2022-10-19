@@ -5,6 +5,10 @@ import { mobile, Tablate } from '../responsive'
 import { addUser } from '../redux/apiCalls';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet-async";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const Container = styled.div`
 width:100vw;
@@ -22,7 +26,6 @@ justify-content: center;
 
 const Wrapper = styled.div`
 width: 40%;
-height: 60vh;
 padding: 20px;
 background-color: #fff;
 border-radius:10px;
@@ -105,8 +108,7 @@ function Register() {
 
     const handleClick = (e) => {
       e.preventDefault();
-       inputs && password && password===repassword && addUser({...inputs,password},dispatch);
-       inputs && password && password===repassword && navigate(`/login`);
+       inputs && password && password===repassword && addUser({...inputs,password},dispatch) && navigate(`/login`);
     }
 
 
@@ -133,7 +135,17 @@ function Register() {
                  data in according with the <b>PRIVECY POLICY</b>
              </Agreement>
              <Button onClick={handleClick} disabled={isFetching}>CREATE</Button>
-             {password !== repassword && <Error>Passwords aren't the same </Error>}
+             {password !== repassword && 
+              <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity="error">The Passwords aren't the same — check!</Alert> 
+              </Stack> 
+             }
+             {
+              isFetching &&
+               <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
+              <CircularProgress color="secondary" />
+              </Stack> 
+            }
              <Link to="/login"><Link1>DO YOU HAVE AN ACCOUNT?</Link1></Link>
          </Form>
        </Wrapper>

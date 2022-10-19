@@ -50,7 +50,7 @@ const Success = () => {
           backgroundColor:"teal"
         }}
       >
-        <img style={{width:70,height:70,marginBottom:15}} src="https://cdn.icon-icons.com/icons2/1182/PNG/128/1490129392-rounded28_82189.png" alt="" />
+        <img style={{width:70,height:70,marginBottom:15}} src="https://firebasestorage.googleapis.com/v0/b/shop-d56bf.appspot.com/o/16661723512931490129392-rounded28_82189.ico?alt=media&token=813db413-acea-4e69-9e6b-6fb819deaeb8" alt="" />
         {orderId
           ?  <span style={{color:"#fff"}}>Order has been created successfully. Your order number is : <b>{orderId}</b></span>
           : <span style={{color:"#fff"}}>Successfull. Your order is being prepared...</span>}

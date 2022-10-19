@@ -38,16 +38,24 @@ const userShop_authReg_post = async (req, res) => {
 const userShop_authLog_post = async (req, res) => {
   try {
     const user = await UserShop.findOne({ username: req.body.username});
-    !user && res.status(401).json("Wrong credentials!")
+    if (!user) {
+      res.status(401).json("Wrong User Name!");
+      return;
+    }
 
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
       process.env.PASS_SEC
     );
+    
     const Originalpassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+    const inputPassword =req.body.password;
 
-    Originalpassword !== req.body.password && res.status(401).json("Wrong credentials!")
 
+    if (Originalpassword != inputPassword) {
+      res.status(401).json("Wrong Password")
+      return;
+    }
     //to security and pimition to access without login again
     const accsessToken = jwt.sign({
        id:user.id,
