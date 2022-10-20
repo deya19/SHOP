@@ -10,13 +10,15 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 
 ReactDOM.render(
+  <React.StrictMode>
   <Provider store={store}>
   <PersistGate loading={null} persistor={persistor}>
   <HelmetProvider>
     <App />
   </HelmetProvider>
   </PersistGate>
-  </Provider>,
+  </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

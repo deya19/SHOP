@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: 
+
+
+
+Sitemap: https://deyaa-shop99.firebaseapp.com/sitemap.xml 
