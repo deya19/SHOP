@@ -11,6 +11,8 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/login";
 import { useSelector } from "react-redux";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
    

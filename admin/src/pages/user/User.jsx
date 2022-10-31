@@ -1,6 +1,5 @@
 import {
   CalendarToday,
-  LocationSearching,
   MailOutline,
   PermIdentity,
   PhoneAndroid,
@@ -30,7 +29,7 @@ export default function User() {
   state.other.users.find((user) => user._id === userId)
 );
 
-console.log(inputs)
+
 
 const handleChange = (e) =>{
   setInputs(prev=>{
@@ -185,6 +184,8 @@ uploadTask.on('state_changed',
           </div>
         </div>
       </div>
+
     </>
+    
   );
 }

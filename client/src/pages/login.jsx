@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
+import { removeEveryAlert } from '../redux/userRedux'
 
 
 
@@ -81,7 +82,7 @@ function Login() {
   const[username,SetUsername] = useState("")
   const[password,SetPassword] = useState("")
   const dispatch = useDispatch();
-  const {isFetching,error} = useSelector(state=>state.user)
+  const {isFetching,error,currentError} = useSelector(state=>state.user)
   
 
 
@@ -117,7 +118,7 @@ function Login() {
             <Button onClick={handleClick} disabled={isFetching} >LOGIN</Button>
             {error && 
               <Stack sx={{ width: '100%' }} spacing={2}>
-              <Alert severity="error">The Username or Password wrong — check it out!</Alert> 
+              <Alert severity="error">{currentError} — check it out!</Alert> 
               </Stack>
             }
             {
@@ -128,7 +129,7 @@ function Login() {
             }
             
             <Link1>DO NOT YOU REMEMBER THE PASSWORD?</Link1>
-            <Link to="/register"><Link1>CREATE A NEW ACCOUNT</Link1></Link>
+            <Link to="/register"><Link1 onClick={()=>dispatch(removeEveryAlert())}>CREATE A NEW ACCOUNT</Link1></Link>
         </Form>
       </Wrapper>
     </Container>

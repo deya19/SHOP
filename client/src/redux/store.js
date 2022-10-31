@@ -21,7 +21,7 @@ const persistConfig = {
   storage,
 }
 
-const rootReducer = combineReducers({user:userReducer,cart:cartReducer,regiter:registerReducer})
+const rootReducer = combineReducers({user:userReducer,cart:cartReducer,register:registerReducer})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)  // to not lose any thing when refresh
 

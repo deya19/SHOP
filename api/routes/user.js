@@ -24,7 +24,10 @@ router.get("/", verifyTokenAndAdmain, userShop_user_get);
 
 
 //GET USER STATS
-router.get("/stats",verifyTokenAndAdmain,userShop_userStats_get)
+router.get("/stats",verifyTokenAndAdmain,userShop_userStats_get);
+
+
+
 
 
 module.exports = router;

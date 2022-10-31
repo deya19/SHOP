@@ -176,7 +176,7 @@ export default function Product() {
               <label>Price</label>
               <input name="price" type="number" placeholder={product.price} onChange={handleChange}/>
               <label>Color</label>
-              <input name="color" type="number" placeholder={product.color} onChange={handleChange}/>
+              <input name="color" type="text" placeholder={product.color} onChange={handleChange}/>
               <label>Categories</label>
               <input type="text" placeholder={product.categories} onChange={handleCat}/>
               <label>In Stock</label>

@@ -32,6 +32,7 @@ import { loginFailure, loginStart, loginSuccess,logout } from "./userRedux";
 
 
 
+
 ///Login in or sign in 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -40,6 +41,28 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(res.data));
   } catch (error) {
     dispatch(loginFailure());
+  }
+};
+
+///Login in or sign in for admin
+export const loginAdmin = async (dispatch, user) => {
+  dispatch(loginStart());
+  try {
+    const res = await publicRequest.post("/auth/loginadmin", user);
+    dispatch(loginSuccess(res.data));
+  } catch (error) {
+    dispatch(loginFailure(error.response.data));
+  }
+};
+
+//Register
+export const addUser = async (user, dispatch) => {
+  dispatch(addUserStart());
+  try {
+    const res = await userRequest.post(`/auth/register`, user);
+    dispatch(addUserSuccess(res.data));
+  } catch (error) {
+    dispatch(addUserFailure());
   }
 };
 
@@ -128,13 +151,3 @@ export const updateUser = async (id,user, dispatch) => {
   }
 };
 
-
-export const addUser = async (user, dispatch) => {
-  dispatch(addUserStart());
-  try {
-    const res = await userRequest.post(`/auth/register`, user);
-    dispatch(addUserSuccess(res.data));
-  } catch (error) {
-    dispatch(addUserFailure());
-  }
-};

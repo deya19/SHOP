@@ -1,28 +1,26 @@
 import { useState } from "react";
 import { useDispatch} from "react-redux";
-import { useHistory } from "react-router-dom";
-import { login } from "../../redux/apiCalls";
+import { loginAdmin } from "../../redux/apiCalls";
 import "./login.css";
 import { Helmet } from "react-helmet-async";
+import Alert from 'react-bootstrap/Alert'
+import { useSelector } from "react-redux";
+import Spinner from 'react-bootstrap/Spinner';
 
 function Login() {
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const history = useHistory();
+  
 
-  console.log(process.env);
 
   const handleClick = (e) => {
     e.preventDefault();
-    username === process.env.REACT_APP_USERNAME &&
-      password === process.env.REACT_APP_PASSWORD &&
-      login(dispatch, { username, password });
-
-    username === process.env.REACT_APP_USERNAME &&
-      password === process.env.REACT_APP_PASSWORD &&
-      history.push("/");
+    username && password && loginAdmin(dispatch, { username, password})
   };
+
+  const {isFetching,error,currentError} = useSelector(state=>state.user)
 
   return (
   <>
@@ -47,9 +45,11 @@ function Login() {
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+          {error && <Alert variant="danger" style={{fontSize:"13px"}}>{currentError}—check it out!</Alert>}
           <button className="buttonAdmin" onClick={handleClick}>
             Login
           </button>
+          {isFetching && <Spinner animation="border" variant="success" />}
         </form>
       </div>
   </>

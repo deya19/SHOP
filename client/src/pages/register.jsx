@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
+import { removeEveryAlert } from '../redux/registerRedux';
 
 
 const Container = styled.div`
@@ -95,7 +96,9 @@ function Register() {
   let navigate = useNavigate();
   const [password,setPassword] = useState("");
   const [repassword,setRePassword] = useState("");
-  const {isFetching} = useSelector(state=>state.user)
+  const {isFetching,error,currentError,go} = useSelector(state=>state.register)
+   
+  console.log(go)
 
   const handleChange = (e) =>{
     setInputs(prev=>{
@@ -103,12 +106,12 @@ function Register() {
     })
     }
 
-
+   
 
 
     const handleClick = (e) => {
       e.preventDefault();
-       inputs && password && password===repassword && addUser({...inputs,password},dispatch) && navigate(`/login`);
+       inputs && password && password===repassword && addUser({...inputs,password},dispatch) ;
     }
 
 
@@ -140,18 +143,31 @@ function Register() {
               <Alert severity="error">The Passwords aren't the same — check!</Alert> 
               </Stack> 
              }
+             {error && 
+              <Stack sx={{ width: '100%' }} spacing={2}>
+              <Alert severity="warning">{currentError} — check!</Alert> 
+              </Stack> 
+             }
              {
               isFetching &&
                <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
               <CircularProgress color="secondary" />
               </Stack> 
             }
-             <Link to="/login"><Link1>DO YOU HAVE AN ACCOUNT?</Link1></Link>
+            {
+              go &&
+               <Stack sx={{ width: '100%' }} spacing={2}>
+               <Alert severity="success">The user is created — Please Log In!</Alert> 
+              </Stack> 
+            }
+             <Link to="/login"><Link1 onClick={()=>dispatch(removeEveryAlert())}>DO YOU HAVE AN ACCOUNT?</Link1></Link>
          </Form>
        </Wrapper>
      </Container>
    </>
   )
 }
+
+
 
 export default Register

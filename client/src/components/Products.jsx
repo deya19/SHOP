@@ -23,8 +23,8 @@ useEffect(() => {
 const getProducts = async () => {
    try {
     const res = await axios.get(cat
-      ? `https://floating-bayou-48172.herokuapp.com/api/products?category=${cat}`
-      : `https://floating-bayou-48172.herokuapp.com/api/products`);
+      ? `http://localhost:5000/api/products?category=${cat}`
+      : `http://localhost:5000/api/products`);
     
       setProducts(res.data)
 

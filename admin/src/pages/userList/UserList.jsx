@@ -7,7 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from "../../redux/apiCalls";
 import { Helmet } from "react-helmet-async";
 
+
+
+
+
+
+
+
+
 export default function UserList() {
+
 
 
   const dispatch = useDispatch()
@@ -66,7 +75,7 @@ export default function UserList() {
         <title>ALL USERS</title>
         <meta name="description" content="users"/>
       </Helmet>
-      <div className="userList">
+      <div className="userList classes.root">
         <DataGrid
           rows={users}
           disableSelectionOnClick

@@ -5,7 +5,8 @@ import Badge from '@mui/material/Badge';
 import {mobile, Tablate} from "../responsive"
 import {Dark} from "../dark-light"
 import { Link } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { logout1 } from '../redux/userRedux';
 
 
 const Fixed = styled.div`
@@ -123,7 +124,8 @@ ${mobile({fontSize:"12px" })}
 
 function Navbar() {
   const quantity = useSelector(state=>state.cart.quantity);
-    
+  const {currentUser} = useSelector(state=>state.user)
+  const dispatch = useDispatch();
   
   
   return (
@@ -139,8 +141,13 @@ function Navbar() {
         </Left>
         <Center><Logo>DEYA'A.</Logo></Center>
         <Right>
-         <NavbarLink to="/register"><MenuItem>REGISTER</MenuItem></NavbarLink>
-         <NavbarLink to="/login"><MenuItem>SIGN IN</MenuItem></NavbarLink>
+       {currentUser ?
+           <NavbarLink to="/"><MenuItem onClick={()=>dispatch(logout1())}>SIGN OUT</MenuItem></NavbarLink>
+           :
+           <>
+           <NavbarLink to="/register"><MenuItem>REGISTER</MenuItem></NavbarLink>
+           <NavbarLink to="/login"><MenuItem>SIGN IN</MenuItem></NavbarLink>
+        </>}
          <Link to="/cart">
          <MenuItem>
          <Badge badgeContent={quantity} color="secondary">

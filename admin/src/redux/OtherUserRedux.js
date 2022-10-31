@@ -30,9 +30,10 @@ const otherUserSlice = createSlice({
     },
     deleteUserSuccess: (state, action) => {
       state.isFetching = false;
+      console.log(action)
       state.users.splice(
         state.users.findIndex((item) => item._id === action.payload),
-      1); // we can delete using splice in redux toolkit
+      2); // we can delete using splice in redux toolkit
     },
     deleteUserFailure: (state) => {
       state.isFetching = false;
