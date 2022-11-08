@@ -236,7 +236,8 @@ function Cart() {
     }
   
     
-
+    
+    
     useEffect(()=>{
     const makeRequest = async() =>{
       try {
@@ -245,12 +246,13 @@ function Cart() {
           amount:cart.total*100,
           
         });
+        console.log(res);
         navigate(`/success`,{state:{stripeData:res.data,products:cart}});
       } catch (error) {
         console.log(error)
       }
     }
-    stripeToken && cart.totla>=1 && makeRequest();
+    stripeToken && cart.total>=1 && makeRequest();
     },[stripeToken, cart.total, navigate, cart])
 
 
